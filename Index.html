@@ -1,0 +1,1210 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salvatore Mazzacano — Content Designer</title>
+<style>
+:root{
+  --paper:#0d1c2b;
+  --paperRGB:13,28,43;
+  --ink:#dceaf6;
+  --ink2:#8aa4bd;
+  --acc:#5fa8d8;
+  --walk:#ffcf5c;
+  --line:#22405a;
+  --sans:"Avenir Next",Avenir,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --display:var(--sans);
+
+  --body:#b4cadd;
+
+  --chipRadius:0px;
+  --chipBg:transparent;
+  --chipBorder:#4d87ad;
+  --chipInk:#aed2ec;
+  --chipOnInk:#08161f;
+  --chipOffInk:#7796ae;
+  --chipOffOp:.85;
+  --chipDeco:none;
+
+  --hWeight:500;
+  --hTrack:-.02em;
+  --hCase:none;
+  --hStyle:normal;
+  --hScale:1;
+  --hLead:1;
+  --hlWeight:inherit;
+  --rule:1px;
+}
+*{box-sizing:border-box}
+html.lock,html.lock body{overflow:hidden;height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+#gcv{position:fixed;inset:0;z-index:0;pointer-events:none;display:block}
+
+.vp{min-height:100vh;min-height:100svh;display:flex;align-items:center;position:relative;padding:9vh 0}
+.inner{position:relative;z-index:2;width:100%;max-width:1120px;margin:0 auto;padding:0 36px}
+.hold{max-width:640px;position:relative;padding:40px 46px 42px}
+.hold::before{content:"";position:absolute;inset:-6% -12% -8% -8%;z-index:-1;
+  background:radial-gradient(70% 62% at 42% 50%, rgba(var(--paperRGB),.97) 0%, rgba(var(--paperRGB),.9) 52%, rgba(var(--paperRGB),0) 100%)}
+
+.vp.first{justify-content:center;text-align:center}
+.vp.first .inner{display:flex;justify-content:center}
+.vp.first .hold{max-width:none;padding:44px 40px}
+.vp.first .hold::before{inset:-14% -16%;background:radial-gradient(58% 60% at 50% 50%, rgba(var(--paperRGB),.96) 0%, rgba(var(--paperRGB),.86) 55%, rgba(var(--paperRGB),0) 100%);
+  opacity:0;transition:opacity 1.3s .15s ease}
+.vp.first.reveal .hold::before{opacity:1}
+h1.hero{font-family:var(--display);font-style:var(--hStyle);
+  font-size:calc(clamp(38px,7vw,82px)*var(--hScale));line-height:calc(.99*var(--hLead));
+  letter-spacing:var(--hTrack);text-transform:var(--hCase);margin:0 auto;font-weight:var(--hWeight);max-width:13ch;
+  opacity:0;transform:translateY(14px);transition:opacity 1.5s ease,transform 1.5s cubic-bezier(.2,.8,.3,1)}
+.cue{font-family:var(--sans);font-size:clamp(14px,1.6vw,17px);letter-spacing:.05em;text-transform:none;color:var(--ink2);
+  font-weight:500;margin:34px 0 0;
+  opacity:0;transform:translateY(8px);transition:opacity 1.2s .55s ease,transform 1.2s .55s cubic-bezier(.2,.8,.3,1)}
+.cue::before{content:"";display:block;width:34px;height:1px;background:var(--acc);opacity:.5;margin:0 auto 16px}
+.vp.first.reveal h1.hero{opacity:1;transform:none}
+.vp.first.reveal .cue{opacity:1;transform:none}
+
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--acc);
+  display:flex;align-items:center;gap:12px;margin:0 0 28px}
+.tag::after{content:"";height:1px;width:52px;background:var(--acc);opacity:.4}
+h2{font-family:var(--display);font-style:var(--hStyle);
+  font-size:calc(clamp(27px,4.4vw,50px)*var(--hScale));line-height:calc(1.05*var(--hLead));
+  letter-spacing:var(--hTrack);text-transform:var(--hCase);margin:0;font-weight:var(--hWeight);max-width:17ch}
+h3{font-family:var(--display);font-style:var(--hStyle);
+  font-size:calc(clamp(20px,2.8vw,32px)*var(--hScale));line-height:calc(1.13*var(--hLead));
+  letter-spacing:var(--hTrack);text-transform:var(--hCase);margin:0;font-weight:var(--hWeight);max-width:21ch}
+p.t{font-size:clamp(15.5px,1.72vw,18px);line-height:1.63;color:var(--body);max-width:52ch;margin:21px 0 0}
+p.t+p.t{margin-top:12px}
+p.t.lead{font-size:clamp(16.5px,1.9vw,19.5px)}
+.hl{color:var(--walk);font-weight:var(--hlWeight)}
+
+.emerge{opacity:0;transform:scale(var(--fs,0));
+  transform-origin:var(--ox,50%) var(--oy,50%);
+  will-change:transform,opacity;
+  transition:opacity .72s cubic-bezier(.72,0,.5,1), transform 1s cubic-bezier(.18,.86,.26,1)}
+.on .emerge{opacity:1;transform:none}
+.rise{opacity:0;transition:opacity .75s cubic-bezier(.2,.8,.3,1)}
+.on .rise{opacity:1}
+.emerge .rise{opacity:1;transition:none}
+.measuring .emerge,.measuring .rise{transform:none!important;transition:none!important}
+
+.digs{margin:30px 0 0;border-top:var(--rule) solid var(--line)}
+.dig{border-bottom:var(--rule) solid var(--line)}
+.dig>button{width:100%;text-align:left;background:none;border:0;font-family:inherit;cursor:pointer;
+  padding:13px 0;display:flex;gap:12px;align-items:baseline;font-size:15px;font-weight:600;
+  letter-spacing:-.012em;line-height:1.35;color:var(--ink);transition:color .16s}
+.dig>button:hover{color:var(--acc)}
+.dig>button .pl{font-family:var(--mono);font-size:12px;color:var(--acc);width:11px;flex:none}
+.dig .body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.3,.9,.3,1)}
+.dig.open .body{max-height:38vh;overflow:auto}
+.dig .body p{margin:0 0 14px;padding:0 0 0 23px;font-size:14.5px;line-height:1.62;color:var(--body);max-width:54ch}
+.dig s{text-decoration:line-through;text-decoration-thickness:1px;color:var(--ink2)}
+
+.split{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:center}
+@media (max-width:900px){.split{grid-template-columns:1fr;gap:22px}}
+.split .hold{max-width:none;padding:26px 30px}
+.cross{position:relative;min-width:0;padding:24px 28px}
+.cross::before{content:"";position:absolute;inset:-8% -8%;z-index:-1;
+  background:radial-gradient(70% 62% at 50% 50%, rgba(var(--paperRGB),.97) 0%, rgba(var(--paperRGB),.9) 55%, rgba(var(--paperRGB),0) 100%)}
+.cx-row{padding:11px 0;border-top:var(--rule) solid var(--line)}
+.cx-lab{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);margin:0 0 8px}
+.wk-filters .cx-lab,.wk-out .cx-head{font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink)}
+.wk-filters .cx-lab{margin:0 0 11px}
+.cx-chips{display:flex;flex-wrap:wrap;gap:6px}
+.cx-chips button{font-family:var(--sans);font-size:12.5px;border:var(--rule) solid var(--chipBorder);background:var(--chipBg);
+  color:var(--chipInk);border-radius:var(--chipRadius);padding:5px 11px;cursor:pointer;transition:.14s;line-height:1.3;
+  text-decoration:var(--chipDeco);text-underline-offset:5px;text-decoration-thickness:1px}
+.cx-chips button:hover{border-color:var(--acc);color:var(--acc)}
+.cx-chips button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--chipOnInk);text-decoration:none}
+.cx-chips button:disabled{opacity:var(--chipOffOp);cursor:default;background:transparent;
+  border-style:dashed;border-color:var(--chipBorder);color:var(--chipOffInk);text-decoration:none}
+.cx-chips button:disabled:hover{border-color:var(--chipBorder);color:var(--chipOffInk)}
+.cx-out{border-top:var(--rule) solid var(--line);padding:15px 0 0;margin-top:11px;max-height:32vh;overflow:auto}
+.cx-head{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--acc);margin:0 0 12px}
+.cx-out ul{list-style:none;margin:0;padding:0}
+.cx-out li{font-size:14.5px;line-height:1.55;color:var(--body);padding:0 0 11px 17px;position:relative}
+.cx-out li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:1px;background:var(--acc)}
+.cx-out li .pj-t{display:block;font-weight:600;color:var(--ink)}
+.cx-out li .pj-d{display:block;margin-top:3px}
+
+.wk{width:100%;position:relative;padding:0 46px}
+.wk-intro{max-width:none;padding:0}
+.wk-intro::before{inset:-18% -10% -12% -10%}
+.wk-intro h2,.wk-intro h3,.wk-intro .t{max-width:none}
+.wk-sub{font-family:var(--display);font-style:var(--hStyle);
+  font-size:clamp(18px,2.2vw,25px);line-height:1.28;font-weight:400;
+  letter-spacing:-.012em;color:var(--body);margin:12px 0 0;max-width:none;white-space:nowrap}
+.wk-intro .t:first-of-type{margin-top:30px}
+.wk-intro .t b{font-weight:600;color:var(--ink)}
+
+.wk-band{position:relative;padding:0}
+.wk-band::before{content:"";position:absolute;inset:-14% -10%;z-index:-1;
+  background:radial-gradient(74% 70% at 50% 50%, rgba(var(--paperRGB),.97) 0%, rgba(var(--paperRGB),.9) 58%, rgba(var(--paperRGB),0) 100%)}
+.wk-filters{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin:18px 0 0}
+.wk-filters .cx-row{border-top:var(--rule) solid var(--line);padding:12px 0 0}
+.wk-filters .cx-chips{gap:6px}
+.wk-filters .cx-chips>button{flex:1 1 auto;text-align:center;white-space:nowrap}
+.wk-filters .cx-fill{flex:999 1 0;min-width:0;height:0;display:block}
+.wk-out{margin:38px 0 0}
+.wk-out .cx-head{margin:0 0 16px}
+.wk-out .cx-head span{color:var(--walk);font-weight:400;margin:0 6px}
+.wk-cards{display:grid;grid-auto-flow:column;
+  grid-auto-columns:var(--pjw,262px);
+  column-gap:26px;align-content:start;
+  height:214px;overflow-x:auto;overflow-y:hidden;padding:0 0 12px;
+  scroll-snap-type:x proximity;
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.wk-cards::-webkit-scrollbar{height:5px}
+.wk-cards::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+.wk-cards::-webkit-scrollbar-track{background:transparent}
+.pj{scroll-snap-align:start;min-width:0}
+.wk-cards{cursor:grab}
+.wk-cards.dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.pj{border-top:var(--rule) solid var(--line);padding:13px 0 2px}
+.pj .pj-t{display:block;font-weight:600;font-size:14.5px;line-height:1.32;
+  letter-spacing:-.01em;color:var(--ink)}
+.pj .pj-d{display:block;margin-top:7px;font-size:13.5px;line-height:1.55;color:var(--body)}
+@media (max-width:900px){
+  .wk{padding:0}
+  .wk-sub{white-space:normal}
+  #works{display:block;padding:0;min-height:0;height:calc(100svh + var(--foldH,0px))}
+  #works>.inner{position:sticky;top:0;height:100vh;height:100svh;
+    display:flex;align-items:flex-start;padding-top:11vh;padding-bottom:4vh}
+  .wk-fold{overflow:hidden;will-change:height}
+  .wk-fold-in{will-change:transform}
+  .wk-filters{grid-template-columns:1fr;gap:14px}
+  .wk-filters .cx-chips>button{flex:0 1 auto;font-size:12px;padding:5px 9px}
+  .wk-filters .cx-chips{gap:5px}
+  .wk-filters .cx-lab{margin:0 0 7px}
+  .wk-cards{height:250px;padding:0 0 14px}
+}
+
+.sign{margin:38px 0 0;padding-top:18px;border-top:var(--rule) solid var(--line);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2)}
+.sign b{color:var(--ink);font-weight:600}
+
+.rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:10px;
+  opacity:0;transition:opacity .8s ease}
+.rail.ready{opacity:1}
+.rail i{width:6px;height:6px;border-radius:50%;background:var(--ink2);opacity:.26;transition:.3s;display:block}
+.rail i.on{opacity:1;background:var(--walk);transform:scale(1.6)}
+@media (max-width:700px){.rail{display:none}}
+
+.vp.pin{display:block;padding:0;height:360vh;min-height:0}
+.pin-stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center}
+.pin-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;
+  gap:52px;align-items:start;width:100%;max-width:1120px;margin:0 auto;padding:0 36px}
+.pin-grid .hold{max-width:none;padding:30px 34px}
+
+.deep{position:relative;padding:0 4px}
+.deep::before{content:"";position:absolute;inset:-14% -10%;z-index:-1;
+  background:radial-gradient(72% 64% at 50% 50%, rgba(var(--paperRGB),.97) 0%, rgba(var(--paperRGB),.9) 55%, rgba(var(--paperRGB),0) 100%)}
+.deep-head{display:flex;align-items:center;gap:13px;margin:24px 0 0;opacity:0;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.deep-head .bar{flex:1;height:1px;background:var(--line);position:relative}
+.deep-head .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--walk);display:block;transition:none}
+
+.deck{position:relative}
+.card{position:absolute;left:0;right:0;top:0;padding:1px 0 1px 24px;
+  border-left:var(--rule) solid var(--acc);will-change:transform,opacity;opacity:0}
+.card h4{font-family:var(--display);font-style:var(--hStyle);margin:0;font-size:clamp(17px,1.95vw,21.5px);line-height:1.24;
+  letter-spacing:var(--hTrack);font-weight:var(--hWeight);color:var(--walk);max-width:24ch}
+.card p{margin:13px 0 0;font-size:15px;line-height:1.66;color:var(--body);max-width:46ch}
+
+@media (max-width:900px){
+  .vp.pin{height:auto}
+  .pin-stage{position:static;height:auto;padding:9vh 0}
+  .pin-grid{grid-template-columns:1fr;gap:28px}
+  .deep-head{opacity:1!important;transform:none!important}
+  .deck{height:auto!important}
+  .card{position:relative;opacity:1!important;transform:none!important;filter:none!important;margin:0 0 26px}
+  .card:last-child{margin-bottom:0}
+}
+
+@media (prefers-reduced-motion:reduce){.rise{opacity:1!important;transform:none!important}}
+</style>
+</head>
+<body>
+
+<canvas id="gcv" aria-hidden="true"></canvas>
+<nav class="rail" id="rail" aria-hidden="true"></nav>
+
+<section class="vp sc first" id="first">
+  <div class="inner"><div class="hold">
+    <h1 class="hero">Tutto questo, ridotto a<br><span class="hl">una pagina</span>.</h1>
+    <p class="cue">Salvatore Mazzacano · Content Designer</p>
+  </div></div>
+</section>
+
+<section class="vp sc pin" id="pin">
+  <div class="pin-stage">
+    <div class="pin-grid">
+
+      <div class="hold">
+        <p class="tag rise">01</p>
+        <h2 class="rise">Il mio profilo professionale non l'ho scritto io. <span class="hl">L'ho fatto emergere</span>.</h2>
+        <p class="t lead rise" id="lead">Questo testo l'ha scritto l'AI. Non le ho dato documenti da riassumere: le ho fatto costruire una rete in cui ogni progetto e ogni passione, ogni nota extra lavoro è correlata alle altre. Poi le ho chiesto che professionista ci vedeva.</p>
+        <p class="t rise">Non una pagina che mi descrive. Una pagina derivata da me.</p>
+      </div>
+
+      <div class="deep">
+        <div class="deck" id="deck">
+
+          <article class="card">
+            <h4>Un profilo professionale estratto da una rete neurale</h4>
+            <p>Non ho chiesto «scrivimi un sito». Ho chiesto di analizzare progetti, riflessioni e creazioni, trovarci nodi e concetti comuni — la mia rete di pensiero — e solo dopo farne un profilo.</p>
+          </article>
+
+          <article class="card">
+            <h4>Libreria vs. Grafo</h4>
+            <p>Una libreria di file è muta: si sa dov'è ogni cosa, non cosa c'entra un file con un altro. Qui i collegamenti sono la parte che conta. Una libreria raccoglie documenti, un grafo ne coglie il senso.</p>
+          </article>
+
+          <article class="card">
+            <h4>Non ciò che faccio, ma ciò che sono</h4>
+            <p>Quello che faccio e penso fuori dal lavoro non sono curiosità a margine: è qui che le qualità che porto nel lavoro trovano linfa. Le idee più fertili nascono da relazioni inafferrabili tra tanti piccoli bit.</p>
+          </article>
+
+        </div>
+        <div class="deep-head">
+          <span class="bar"><i></i></span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="vp sc">
+  <div class="inner"><div class="hold">
+    <p class="tag rise">02</p>
+    <h2 class="rise">Quello che ho fatto qui è quello che faccio da <span class="hl">quindici anni</span>.</h2>
+    <p class="t lead rise">Rendere esplicito ciò che resta implicito, dargli una struttura, e solo alla fine scegliere la forma. Cambia il soggetto — un'azienda, un prodotto, io — non cambia il metodo.</p>
+    <p class="t rise">Questo portfolio, per come è concepito, non racconta il mio lavoro: è il mio lavoro. Il valore non sta nelle pagine che vedi, sta nell'idea che le ha rese possibili.</p>
+  </div></div>
+</section>
+
+<section class="vp sc" id="works">
+  <div class="inner">
+    <div class="wk">
+
+      <div class="wk-intro hold">
+        <h2 class="rise">Avvicino le <span class="hl">aziende</span> alle <span class="hl">persone</span>.</h2>
+        <div class="wk-fold"><div class="wk-fold-in">
+        <p class="wk-sub rise">Quindici anni di comunicazione professionale in nove settori.</p>
+        <p class="t rise"><b>Perito meccanico</b>, poi <b>disegno industriale</b> all'università, poi sette anni da <b>assistente fotografo</b> di architettura e still life, operatore <b>call center</b>, <b>moderatore di community</b>, poi <b>scrittura</b> e gestione contenuti, poi <b>strategia</b>.</p>
+        <p class="t rise">Continuo a evolvere come il mio mestiere.</p>
+        </div></div>
+
+      <div class="wk-band rise">
+        <div class="wk-filters">
+          <div class="cx-row"><p class="cx-lab">Competenze</p><div class="cx-chips" id="cxComp"></div></div>
+          <div class="cx-row"><p class="cx-lab">Settori</p><div class="cx-chips" id="cxSet"></div></div>
+        </div>
+        <div class="wk-out">
+          <p class="cx-head" id="cxHead"></p>
+          <div class="wk-cards" id="cxOut"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="vp sc">
+  <div class="inner"><div class="hold">
+    <p class="tag rise">03</p>
+    <h2 class="rise">Quello che i progetti <span class="hl">non dicono</span>.</h2>
+    <p class="t lead rise">Ora leggerai delle qualità che non mi sarei attribuito. Nessun progetto, da solo, le dimostra: sono emerse dai collegamenti, guardando insieme cose che tra loro non c'entravano niente.</p>
+  </div></div>
+</section>
+
+<section class="vp sc">
+  <div class="inner"><div class="hold">
+    <h3 class="rise">Un'emozione è un effetto. Da qualche parte c'è la causa.</h3>
+    <p class="t rise">Un'emozione non arriva per caso: qualcosa l'ha prodotta, e mi interessa risalire a quel qualcosa — nelle mie emozioni come in quelle degli altri. Chi comunica lavora su questo: non su cosa dire, ma su cosa fa scattare qualcosa in chi ascolta.</p>
+  </div></div>
+</section>
+
+<section class="vp sc">
+  <div class="inner"><div class="hold">
+    <h3 class="rise">Prima di dire che una cosa è superata, capisco perché ha funzionato.</h3>
+    <p class="t rise">Cambiare le cose, essere diversi, ha senso quando cambiano le condizioni. Vale per gli oggetti e vale per le persone: prima di chiedere a qualcuno di cambiare abitudine, mi interessa capire cosa tiene in piedi quella che ha già.</p>
+  </div></div>
+</section>
+
+<section class="vp sc">
+  <div class="inner"><div class="hold">
+    <h3 class="rise">Un'idea che sta in piedi è leggera.</h3>
+    <p class="t rise">Sul lavoro ci si traveste per sentirsi sicuri: pose, gerghi, toni solenni. Io mi fido dell'opposto. Sei certo di una cosa solo se ne conosci le crepe: allora puoi riderne. La sicurezza è leggerezza.</p>
+    <p class="t rise">Poi c'è la parte pratica: l'ironia disarma, attira, e stimola attenzione. Per questo la uso proprio dove tutti si irrigidiscono.</p>
+  </div></div>
+</section>
+
+<section class="vp sc">
+  <div class="inner"><div class="hold">
+    <p class="tag rise">04</p>
+    <h2 class="rise">Ho smesso di raccontarmi. <span class="hl">Mi sono fatto leggere</span>.</h2>
+    <p class="t lead rise">Questa pagina non è il portfolio del mio lavoro: ne è l'esito. Il valore che porto non è saper scrivere bene una pagina: è aver concepito che una pagina può essere dedotta così, e averla fatta.</p>
+    <p class="t rise">L'idea è mia. La sintesi è sua. L'opinione è tua.</p>
+    <div class="sign rise"><b>Salvatore Mazzacano</b> · Content Designer</div>
+  </div></div>
+</section>
+
+<script>
+const GC={edge:"96,140,180", node:"130,178,212", label:"150,182,208", walk:"255,207,92",
+          r:1, lw:.7, lwWalk:1.6,
+          font:'10.5px ui-monospace, SFMono-Regular, Menlo, monospace',
+          fontHub:'600 11px ui-monospace, SFMono-Regular, Menlo, monospace'};
+
+const REDUCE=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const SMALL=matchMedia("(max-width:760px)").matches;
+
+const W_LAVORO=[
+"mappa dei contenuti","tono di voce","matrice di posizionamento","test di usabilità",
+"albero di navigazione","modello di governance","calendario editoriale","naming di prodotto",
+"microtesti","stati di errore","primo accesso","messaggi di conferma","analisi comparativa",
+"segmentazione","funnel di adozione","architettura dell'informazione","linee guida di scrittura",
+"glossario condiviso","brief e controbrief","varianti a confronto","etichette dei pulsanti",
+"coerenza tra canali","adattamento locale","doppia lingua","titolazione","chiamata all'azione",
+"messaggi di sistema","comunicazione interna","piano editoriale","tono nelle emergenze"];
+
+const W_VITA=[
+"cupole geodetiche","tipografia da insegna","incastri del legno","segnaletica di montagna",
+"attrezzi da officina","tessiture a telaio","ceramica smaltata","gru portuali","ponteggi",
+"orologi meccanici","cinghie e pulegge","volte a botte","scale elicoidali","nodi marinari",
+"fusioni in ghisa","rilegature","catene di montaggio","antenne paraboliche","insegne al neon",
+"binari e scambi","mulini a vento","fari costieri","modelli in scala","carte nautiche",
+"clessidre","luce radente"];
+
+const W_PENSIERI=[
+"meccanica dei fluidi","ombre portate","cartografia storica","ritmi in levare",
+"notazione musicale","cristallografia","spirali logaritmiche","reticoli e trame",
+"maree e correnti","fotogrammetria","esposizione lunga","densità informativa",
+"gerarchia tipografica","ritmo della lettura","metriche di chiarezza","criteri di valutazione",
+"ricerca sul campo","sintesi","riscrittura","prova di lettura","accessibilità del testo",
+"paragrafo d'apertura"];
+
+const HUBS=["LAVORO","VITA","PENSIERI"];
+const POOLS=[W_LAVORO,W_VITA,W_PENSIERI];
+
+let PIN=null, PIN_TOP=0, PIN_FZ=0;
+function measurePin(){
+  PIN=document.getElementById("pin");
+  if(!PIN||matchMedia("(max-width:900px)").matches){PIN_TOP=0;PIN_FZ=0;return;}
+  PIN_TOP=PIN.offsetTop;
+  PIN_FZ=Math.max(0,PIN.offsetHeight-window.innerHeight);
+}
+function gScrollY(){
+  const y=window.scrollY;
+  if(!PIN_FZ) return y;
+  return y-Math.min(Math.max(0,y-PIN_TOP),PIN_FZ);
+}
+let GSY=0, gOff=0, gOffV=0, gPrevT=null, gPrevV=0;
+function graphScroll(dt){
+  const t=gScrollY();
+  if(gPrevT===null){gPrevT=t; GSY=t; return GSY;}
+  const dtn=Math.max(.4,Math.min(3,dt/16.7));
+  const vel=(t-gPrevT)/dtn;          
+  gPrevT=t;
+  const brake=gPrevV-vel;            
+  gPrevV=vel;
+  if(Math.abs(brake)>.6) gOffV+=brake*.26;
+  gOffV+=(-0.0060*gOff-0.072*gOffV)*dtn;
+  gOff +=gOffV*dtn;
+  if(gOff>120){gOff=120;gOffV=0;} else if(gOff<-120){gOff=-120;gOffV=0;}
+  GSY=t+gOff;
+  return GSY;
+}
+
+function gTotal(){
+  return Math.max(1,document.body.scrollHeight-window.innerHeight-PIN_FZ);
+}
+
+const cv=document.getElementById("gcv"), ctx=cv.getContext("2d");
+let W=0,H=0,DPR=1,docH=0;
+
+const QUOTA=SMALL?[15,12,11]:[28,24,20];
+const picks=[];
+POOLS.forEach((pool,g)=>{
+  pool.slice().sort(()=>Math.random()-.5).slice(0,QUOTA[g]).forEach(t=>picks.push({t,g}));
+});
+const seed=HUBS.map((t,g)=>({t,g,hub:true})).concat(picks);
+const N=seed.length;
+
+const nodes=seed.map((o,i)=>({
+  t:o.t, g:o.g, hub:!!o.hub, i, x:0,y:0,vx:0,vy:0,ax:0,ay:0,tx:0,tb:0,ox:0,oy:0,
+  born:-1,pop:0,nb:[],nb2:[],
+  ph:Math.random()*6.283,  w:.00042+Math.random()*.00026,
+  ph2:Math.random()*6.283, w2:.00039+Math.random()*.00028,
+  ph3:Math.random()*6.283, w3:.00012+Math.random()*.00013,
+  ph4:Math.random()*6.283, w4:.00011+Math.random()*.00012,
+  amp:(o.hub?.5:1)*(6+Math.random()*8),  amp2:(o.hub?.5:1)*(5+Math.random()*7),
+  amp3:(o.hub?.5:1)*(2+Math.random()*4), amp4:(o.hub?.5:1)*(2+Math.random()*4),
+  r:o.hub?4.3:1.7+Math.random()*1.9,
+  im:o.hub?.10:1,
+  sp:.042+Math.random()*.05
+}));
+
+const edges=[], deg=new Array(N).fill(0);
+function link(a,b){ if(a===b)return; edges.push([a,b]); deg[a]++; deg[b]++; }
+for(let i=3;i<N;i++){
+  const g=nodes[i].g;
+  if(Math.random()<.24){ link(i,g); }
+  else{
+    let pool=[],tot=0;
+    for(let j=0;j<i;j++) if(nodes[j].g===g){ const w=deg[j]+1.4; pool.push([j,w]); tot+=w; }
+    if(!pool.length) link(i,g);
+    else{
+      let r=Math.random()*tot, pick=pool[0][0];
+      for(const [j,w] of pool){ r-=w; if(r<=0){pick=j;break;} }
+      link(i,pick);
+    }
+  }
+  if(Math.random()<.46){
+    const cross=Math.random()<.45, cand=[];
+    for(let j=0;j<i;j++) if(cross?nodes[j].g!==g:nodes[j].g===g) cand.push(j);
+    if(cand.length) link(i,cand[(Math.random()*cand.length)|0]);
+  }
+  if(Math.random()<.30){
+    const cand=[];
+    for(let j=3;j<i;j++) if(nodes[j].g!==g&&deg[j]<5) cand.push(j);
+    if(cand.length) link(i,cand[(Math.random()*cand.length)|0]);
+  }
+}
+link(0,1); link(1,2); link(0,2);
+edges.forEach(([a,b])=>{nodes[a].nb.push(b);nodes[b].nb.push(a);});
+
+let bgEdges=[], bgSet=new Set(), path=[];
+function computeAnchors(){
+  measurePin();
+  docH=Math.max(document.body.scrollHeight-PIN_FZ, window.innerHeight);
+  const band=docH/N, MINX=W*.04, MAXX=W*.96, SEP=SMALL?110:150;
+  nodes.forEach((n,i)=>{
+    n.tx=MINX+(((i*0.6180339887)%1))*(MAXX-MINX);   
+    n.ax=n.tx; n.tb=band*(i+.5); n.ay=n.tb;
+  });
+  const REST=W*.16, K=.04, REP=2600;
+  for(let it=0;it<240;it++){
+    for(let i=0;i<N;i++){
+      const a=nodes[i];
+      for(let j=i+1;j<N;j++){
+        const b=nodes[j];
+        let dx=b.ax-a.ax, dy=b.ay-a.ay; const d2=dx*dx+dy*dy;
+        if(d2>90000||d2<.01) continue;
+        const d=Math.sqrt(d2), f=REP/(d2+60); dx/=d; dy/=d;
+        a.ax-=dx*f; a.ay-=dy*f; b.ax+=dx*f; b.ay+=dy*f;
+      }
+    }
+    for(const [i,j] of edges){
+      const a=nodes[i],b=nodes[j];
+      let dx=b.ax-a.ax, dy=b.ay-a.ay; const d=Math.hypot(dx,dy)||.01;
+      if(d<REST) continue;
+      const f=(d-REST)*K; dx/=d; dy/=d;
+      a.ax+=dx*f; a.ay+=dy*f; b.ax-=dx*f; b.ay-=dy*f;
+    }
+    for(const n of nodes){
+      n.ax+=(n.tx-n.ax)*.10;
+      n.ay+=(n.tb-n.ay)*.5;
+      n.ay=Math.max(n.tb-band*.75,Math.min(n.tb+band*.75,n.ay));
+      n.ax=Math.max(MINX,Math.min(MAXX,n.ax));
+    }
+  }
+  for(let it=0;it<60;it++){
+    for(let i=0;i<N;i++)for(let j=i+1;j<N;j++){
+      const a=nodes[i],b=nodes[j];
+      const dx=b.ax-a.ax, dy=b.ay-a.ay, d=Math.hypot(dx,dy);
+      if(d<SEP&&d>.01){const p=(SEP-d)/d*.5; a.ax-=dx*p; a.ay-=dy*p*.25; b.ax+=dx*p; b.ay+=dy*p*.25;}
+    }
+    for(const n of nodes){
+      n.ay=Math.max(n.tb-band*.75,Math.min(n.tb+band*.75,n.ay));
+      n.ax=Math.max(MINX,Math.min(MAXX,n.ax));
+    }
+  }
+  bgEdges=[]; bgSet=new Set(); nodes.forEach(n=>n.nb2=[]);
+  nodes.forEach((a,i)=>{
+    nodes.map((b,j)=>({j,d:Math.hypot(a.ax-b.ax,a.ay-b.ay)}))
+      .filter(o=>o.j!==i).sort((p,q)=>p.d-q.d).slice(0,2)
+      .forEach(o=>{
+        if(o.d>SEP*3.6) return;
+        const k=i<o.j?i+"-"+o.j:o.j+"-"+i;
+        if(bgSet.has(k))return;
+        bgSet.add(k); bgEdges.push([i,o.j]);
+        nodes[i].nb2.push(o.j); nodes[o.j].nb2.push(i);
+      });
+  });
+  buildPath();
+  if(window.EMERGE_RECOMPUTE) window.EMERGE_RECOMPUTE();
+}
+
+let pathY=[];
+function buildPathY(){
+  pathY=[]; let m=-1e9;
+  for(let k=0;k<path.length;k++){ m=Math.max(m,nodes[path[k]].ay); pathY.push(m); }
+}
+function buildPath(){
+  const seen=new Set(); path=[];
+  let cur=nodes.reduce((a,b)=>a.ay<b.ay?a:b).i;
+  seen.add(cur); path.push(cur);
+  while(path.length<N){
+    const n=nodes[cur]; let next=-1, best=Infinity;
+    for(const k of n.nb2){
+      if(seen.has(k))continue;
+      const m=nodes[k];
+      const d=Math.hypot(m.ax-n.ax,m.ay-n.ay)+(m.ay<n.ay?520:0);
+      if(d<best){best=d;next=k;}
+    }
+    if(next<0){
+      let bd=Infinity;
+      for(let j=0;j<N;j++){
+        if(seen.has(j))continue;
+        const m=nodes[j], dy=m.ay-n.ay;
+        if(dy<-80)continue;
+        const d=Math.hypot(m.ax-n.ax,dy);
+        if(d<bd){bd=d;next=j;}
+      }
+    }
+    if(next<0){ next=nodes.findIndex((m,j)=>!seen.has(j)); if(next<0)break; }
+    seen.add(next); path.push(next); cur=next;
+  }
+  buildPathY();
+}
+
+function resize(){
+  DPR=Math.min(2,window.devicePixelRatio||1);
+  W=window.innerWidth; H=window.innerHeight;
+  cv.width=W*DPR; cv.height=H*DPR; cv.style.width=W+"px"; cv.style.height=H+"px";
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.font=GC.font;
+  ctx.lineCap="round"; ctx.lineJoin="round";
+}
+resize();
+
+const T_GROW=5000;
+let phase="grow", t0=performance.now(), spreadT0=0, lastT=performance.now();
+nodes.forEach(n=>{n.x=W/2+(Math.random()-.5)*30; n.y=H/2+(Math.random()-.5)*30;});
+
+function poles(){
+  const cx=W/2, cy=H/2;
+  const rx=Math.min(W*.30, W*.5-150), ry=Math.min(H*.28, H*.5-120);
+  return [[cx-rx,cy+ry*.44],[cx+rx,cy+ry*.44],[cx,cy-ry]];
+}
+function growStep(vis){
+  const REST=SMALL?68:88, K=.05, REP=1450, cx=W/2, cy=H/2, PL=poles();
+  for(let i=0;i<vis;i++){
+    const a=nodes[i];
+    for(let j=i+1;j<vis;j++){
+      const b=nodes[j];
+      let dx=b.x-a.x, dy=b.y-a.y; const d2=dx*dx+dy*dy;
+      if(d2<.01||d2>60000) continue;
+      const d=Math.sqrt(d2), f=REP/(d2+30); dx/=d; dy/=d;
+      a.vx-=dx*f*a.im; a.vy-=dy*f*a.im; b.vx+=dx*f*b.im; b.vy+=dy*f*b.im;
+    }
+  }
+  for(const [i,j] of edges){
+    if(i>=vis||j>=vis)continue;
+    const a=nodes[i],b=nodes[j];
+    let dx=b.x-a.x, dy=b.y-a.y;
+    const d=Math.hypot(dx,dy)||.01, f=(d-REST)*K; dx/=d; dy/=d;
+    a.vx+=dx*f*a.im; a.vy+=dy*f*a.im; b.vx-=dx*f*b.im; b.vy-=dy*f*b.im;
+  }
+  const limX=Math.min(W*.42*1.6, W*.5-64);
+  const limY=Math.min(H*.42*1.6, H*.5-46);
+  for(let i=0;i<vis;i++){
+    const n=nodes[i];
+    const p=PL[n.g], k=n.hub?.020:.0034;
+    n.vx+=(p[0]-n.x)*k; n.vy+=(p[1]-n.y)*k;
+    if(!n.hub){n.vx+=(cx-n.x)*.0009; n.vy+=(cy-n.y)*.0009;}  
+    const fr=n.hub?.70:.83;
+    n.vx*=fr; n.vy*=fr; n.x+=n.vx; n.y+=n.vy;
+    const dx=n.x-cx, dy=n.y-cy;
+    const e=(dx*dx)/(limX*limX)+(dy*dy)/(limY*limY);
+    if(e>1){const s=1/Math.sqrt(e); n.x=cx+dx*s; n.y=cy+dy*s;}
+    if(n.pop<1) n.pop=Math.min(1,n.pop+.08);
+  }
+}
+
+function liveStep(now){
+  const sy=GSY;
+  for(const n of nodes){
+    const dx=Math.sin(now*n.w+n.ph)*n.amp  + Math.sin(now*n.w3+n.ph3)*n.amp3;
+    const dy=Math.cos(now*n.w2+n.ph2)*n.amp2 + Math.cos(now*n.w4+n.ph4)*n.amp4;
+    n.ox+=(dx-n.ox)*.058;
+    n.oy+=(dy-n.oy)*.058;
+    n.x=n.ax+n.ox; n.y=n.ay+n.oy-sy;
+  }
+}
+
+const HOP=190;              
+let wi=0, wf=0, wpos=0;
+const HEAD={x:0,y:0,node:-1,ok:false};
+const PULSE=[];
+function walkTarget(){
+  if(path.length<2||!pathY.length) return 0;
+  const c=gScrollY()+window.innerHeight*.5;
+  let lo=0,hi=path.length-1,res=0;
+  while(lo<=hi){ const mid=(lo+hi)>>1; if(pathY[mid]<=c){res=mid;lo=mid+1;} else hi=mid-1; }
+  return res;
+}
+function walkStep(dt){
+  if(path.length<2) return;
+  const target=walkTarget();
+  if(wpos!==target){
+    const dist=Math.abs(target-wpos);
+    const step=(dt/HOP)*Math.min(3,1+dist*.35);
+    wpos = wpos<target ? Math.min(target,wpos+step) : Math.max(target,wpos-step);
+  }
+  const last=path.length-1;
+  wpos=Math.max(0,Math.min(last,wpos));
+  wi=Math.min(last,Math.floor(wpos));
+  wf=wpos-wi;
+  if(wi>=last){wi=last;wf=0;}
+}
+const easeHop=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+function drawWalk(k){
+  if(!path.length)return;
+  const sy=window.scrollY;
+  const P=i=>{const n=nodes[path[i]];return [n.x, n.y];};
+  const vis=(y)=>y>-200&&y<H+200;
+  ctx.lineWidth=GC.lwWalk;
+  for(let i=0;i<wi;i++){
+    const [x1,y1]=P(i), [x2,y2]=P(i+1);
+    if(!vis(y1)&&!vis(y2))continue;
+    const a=path[i], b=path[i+1];
+    const linked=bgSet.has(a<b?a+"-"+b:b+"-"+a);
+    ctx.strokeStyle="rgba("+GC.walk+","+(linked?.62:.26)*k+")";
+    ctx.setLineDash(linked?[]:[3,5]);
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  }
+  ctx.setLineDash([]);
+  let hx=null,hy=null;
+  if(wi<path.length-1){
+    const [x1,y1]=P(wi), [x2,y2]=P(wi+1);
+    const e=easeHop(wf);
+    hx=x1+(x2-x1)*e; hy=y1+(y2-y1)*e;
+    if(vis(y1)||vis(y2)){
+      const a=path[wi], b=path[wi+1];
+      const linked=bgSet.has(a<b?a+"-"+b:b+"-"+a);
+      ctx.strokeStyle="rgba("+GC.walk+","+(linked?.62:.26)*k+")";
+      ctx.setLineDash(linked?[]:[3,5]);
+      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(hx,hy); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+  }else{const p0=P(wi); hx=p0[0]; hy=p0[1];}
+  if(hx!==null){HEAD.x=hx; HEAD.y=hy; HEAD.node=path[Math.min(wi,path.length-1)]; HEAD.ok=true;}
+  for(let i=0;i<=wi;i++){
+    const n=nodes[path[i]];
+    if(!vis(n.y))continue;
+    ctx.fillStyle="rgba("+GC.walk+","+.75*k+")";
+    ctx.beginPath(); ctx.arc(n.x,n.y,n.r+.7,0,6.283); ctx.fill();
+  }
+  if(hx!==null&&vis(hy)){
+    ctx.fillStyle="rgba("+GC.walk+","+.95*k+")";
+    ctx.beginPath(); ctx.arc(hx,hy,3.4,0,6.283); ctx.fill();
+    ctx.strokeStyle="rgba("+GC.walk+","+.28*k+")"; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.arc(hx,hy,7.5,0,6.283); ctx.stroke();
+  }
+}
+
+function draw(mode,k){
+  ctx.clearRect(0,0,W,H);
+  const inView=y=>y>-140&&y<H+140;
+  ctx.lineWidth=GC.lw; ctx.setLineDash([]); ctx.font=GC.font;
+  for(const [i,j] of (mode==="grow"?edges:bgEdges)){
+    const a=nodes[i], b=nodes[j];
+    if(mode==="grow"&&(a.born<0||b.born<0))continue;
+    if(!inView(a.y)&&!inView(b.y))continue;
+    const al=mode==="grow"?.30*Math.min(a.pop,b.pop):.13*k;
+    ctx.strokeStyle="rgba("+GC.edge+","+al.toFixed(3)+")";
+    ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+  }
+  for(const n of nodes){
+    if(mode==="grow"&&n.born<0)continue;
+    if(!inView(n.y))continue;
+    const pop=mode==="grow"?n.pop:1;
+    ctx.fillStyle="rgba("+GC.node+","+((mode==="grow"?.8*pop:.34*k)).toFixed(3)+")";
+    ctx.beginPath(); ctx.arc(n.x,n.y,n.r*pop*GC.r,0,6.283); ctx.fill();
+    if(!n.noLabel){
+      ctx.fillStyle="rgba("+(n.hub?GC.walk:GC.label)+","+((mode==="grow"?.55*pop:.26*k)*(n.hub?1.5:1)).toFixed(3)+")";
+      if(n.hub){
+        ctx.font=GC.fontHub;
+        ctx.fillText(n.t,n.x+n.r*GC.r+6,n.y+3.5);
+        ctx.font=GC.font;
+      }else ctx.fillText(n.t,n.x+7,n.y+3.5);
+    }
+  }
+  if(mode!=="grow") drawWalk(k);
+  if(PULSE.length){
+    const t=performance.now();
+    for(let i=PULSE.length-1;i>=0;i--){
+      const p=PULSE[i], a=(t-p.t0)/1100;
+      if(a>=1||p.n<0||!nodes[p.n]){PULSE.splice(i,1);continue;}
+      const n=nodes[p.n], e=1-Math.pow(1-a,3);
+      ctx.strokeStyle="rgba("+GC.walk+","+(.55*(1-a)*k).toFixed(3)+")";
+      ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.arc(n.x,n.y,6+e*90,0,6.283); ctx.stroke();
+    }
+  }
+}
+
+function frame(now){
+  const dt=Math.min(60,now-lastT); lastT=now;
+  if(phase==="grow"){
+    const p=Math.min(1,(now-t0)/T_GROW);
+    const vis=Math.max(2,Math.floor(N*Math.pow(p,.88)));
+    for(let i=0;i<vis;i++){
+      if(nodes[i].born<0){
+        nodes[i].born=now;
+        if(nodes[i].hub){
+          const p=poles()[nodes[i].g];
+          nodes[i].x=p[0]+(Math.random()-.5)*8;
+          nodes[i].y=p[1]+(Math.random()-.5)*8;
+          nodes[i].vx=0; nodes[i].vy=0;
+        }else{
+          const par=nodes[i].nb.find(k=>k<i);
+          const src=par!==undefined?nodes[par]:nodes[0];
+          nodes[i].x=src.x+(Math.random()-.5)*26;
+          nodes[i].y=src.y+(Math.random()-.5)*26;
+        }
+      }
+    }
+    growStep(vis); growStep(vis); draw("grow",1);
+    if(p>=1){phase="title"; endIntro();}
+  }else if(phase==="title"){
+    growStep(N); draw("grow",1);
+    graphScroll(dt);
+  }else if(phase==="spread"){
+    graphScroll(dt);
+    const sy=GSY;
+    let far=0;
+    for(const n of nodes){
+      const e=1-Math.pow(1-n.sp, dt/16.7);   
+      const dx=Math.sin(now*n.w+n.ph)*n.amp  + Math.sin(now*n.w3+n.ph3)*n.amp3;
+      const dy=Math.cos(now*n.w2+n.ph2)*n.amp2 + Math.cos(now*n.w4+n.ph4)*n.amp4;
+      n.ox+=(dx-n.ox)*.058; n.oy+=(dy-n.oy)*.058;
+      const tx=n.ax+n.ox, ty=n.ay+n.oy-sy;
+      n.x+=(tx-n.x)*e; n.y+=(ty-n.y)*e;
+      const d=Math.abs(tx-n.x)+Math.abs(ty-n.y);
+      if(d>far) far=d;
+    }
+    const k=Math.min(1,(now-spreadT0)/900);
+    walkStep(dt); draw("live",k);
+    if(far<1.2||now-spreadT0>4500) phase="live";
+  }else{
+    graphScroll(dt); liveStep(now); walkStep(dt); draw("live",1);
+  }
+  if(phase!=="grow"&&phase!=="title"&&window.EMERGE_TICK) window.EMERGE_TICK();
+  requestAnimationFrame(frame);
+}
+
+function endIntro(){
+  document.getElementById("first").classList.add("reveal");
+  document.documentElement.classList.remove("lock");
+  armSpread();                       
+}
+function armSpread(){
+  const go=()=>{
+    if(phase!=="title")return;
+    ["wheel","touchstart","keydown","scroll"].forEach(e=>window.removeEventListener(e,go));
+    document.getElementById("rail").classList.add("ready");
+    document.documentElement.classList.add("snap");
+    computeAnchors();
+    for(const n of nodes){n.sx=n.x; n.sy0=n.y;}
+    wi=0; wf=0; wpos=0;
+    spreadT0=performance.now(); phase="spread";
+  };
+  ["wheel","touchstart","keydown","scroll"].forEach(e=>window.addEventListener(e,go,{passive:true}));
+}
+
+const SCROLL_HOLD=(function(){
+  let from=0,to=0,t0=0,glide=1,until=0,live=false;
+  const active=()=>live&&performance.now()<until;
+  const stop=e=>{ if(active()) e.preventDefault(); };
+  addEventListener("wheel",stop,{passive:false});
+  addEventListener("touchmove",stop,{passive:false});
+  addEventListener("keydown",e=>{
+    if(active()&&["ArrowUp","ArrowDown","PageUp","PageDown","Home","End"," "].indexOf(e.key)>=0) e.preventDefault();
+  },{passive:false});
+  (function tick(){
+    if(live){
+      const now=performance.now();
+      if(now<until){
+        const p=Math.min(1,(now-t0)/glide), e=1-Math.pow(1-p,3);
+        window.scrollTo(0, Math.round(from+(to-from)*e));
+      }else live=false;
+    }
+    requestAnimationFrame(tick);
+  })();
+  return function(y,glideMs,holdMs){
+    if(REDUCE) return;
+    const max=Math.max(0,document.body.scrollHeight-window.innerHeight);
+    to=Math.max(0,Math.min(max,y));
+    from=window.scrollY; t0=performance.now(); glide=Math.max(1,glideMs);
+    until=t0+glideMs+holdMs; live=true;
+  };
+})();
+
+let lastW=window.innerWidth, rTid=0;
+window.addEventListener("resize",()=>{
+  clearTimeout(rTid);
+  rTid=setTimeout(()=>{
+    const changed=Math.abs(window.innerWidth-lastW)>40;
+    resize(); measurePin();
+    if(changed&&(phase==="live"||phase==="spread")){lastW=window.innerWidth; computeAnchors();}
+  },220);
+});
+
+document.documentElement.classList.add("lock");
+if(REDUCE){
+  document.documentElement.classList.remove("lock");
+  document.getElementById("first").classList.add("reveal");
+  document.getElementById("rail").classList.add("ready");
+  document.documentElement.classList.add("snap");
+  computeAnchors();
+  for(const n of nodes){n.x=n.ax; n.y=n.ay;}
+  phase="live";
+}
+requestAnimationFrame(frame);
+
+(function(){
+  const vps=[...document.querySelectorAll(".vp")];
+  const rail=document.getElementById("rail");
+  rail.innerHTML=vps.map(()=>"<i></i>").join("");
+  const dots=[...rail.children];
+  if(!("IntersectionObserver" in window)) vps.forEach(v=>v.classList.add("on"));
+  let q=false;
+  function mark(){
+    q=false;
+    const c=window.innerHeight/2; let bi=0,bd=Infinity;
+    vps.forEach((v,i)=>{
+      const r=v.getBoundingClientRect();
+      const d=r.top>c?r.top-c:(r.bottom<c?c-r.bottom:0);
+      if(d<bd){bd=d;bi=i;}
+    });
+    dots.forEach((d,j)=>d.classList.toggle("on",j===bi));
+  }
+  window.addEventListener("scroll",()=>{if(!q){q=true;requestAnimationFrame(mark);}},{passive:true});
+  window.addEventListener("resize",mark);
+  mark();
+})();
+
+(function(){
+  const pin=document.getElementById("pin");
+  if(!pin) return;
+  const cards=[...pin.querySelectorAll(".card")];
+  const deck=document.getElementById("deck");
+  const deep=pin.querySelector(".deep");
+  const lead=document.getElementById("lead");
+  const head=pin.querySelector(".deep-head");
+  const fill=pin.querySelector(".deep-head .bar i");
+  const mob=()=>matchMedia("(max-width:900px)").matches;
+  const ez=t=>1-Math.pow(1-t,3);
+  const LEAD=.10, SPAN=.78;      
+  const FADE=.22;                
+
+  function sizeDeck(){
+    if(mob()){deck.style.height="auto";return;}
+    let h=0;
+    cards.forEach(c=>{
+      const prev=c.style.cssText;
+      c.style.cssText="position:relative;opacity:0;transform:none;filter:none";
+      h=Math.max(h,c.offsetHeight);
+      c.style.cssText=prev;
+    });
+    deck.style.height=h+"px";
+  }
+
+  function alignTop(){
+    if(mob()){deep.style.marginTop="";return;}
+    pin.classList.add("measuring");
+    deep.style.marginTop="0px";
+    const h4=cards[0].querySelector("h4");
+    const target=lead.getBoundingClientRect().top;
+    const now=deck.getBoundingClientRect().top+(h4?h4.offsetTop:0);
+    deep.style.marginTop=Math.max(0,target-now)+"px";
+    pin.classList.remove("measuring");
+  }
+
+  function apply(){
+    if(mob()){cards.forEach(c=>{c.style.cssText="";}); head.style.cssText=""; return;}
+    const travel=Math.max(1,pin.offsetHeight-window.innerHeight);
+    const p=Math.min(1,Math.max(0,-pin.getBoundingClientRect().top/travel));
+    const pIn=Math.min(1,Math.max(0,(p-LEAD)/SPAN));
+    const f=pIn*cards.length;
+    cards.forEach((c,i)=>{
+      const d=f-i; let o,ty,s,bl;
+      if(d<=0){ o=0; ty=44; s=.985; bl=0; }
+      else if(d<1){ const e=ez(Math.min(1,d/FADE)); o=e; ty=44*(1-e); s=.985+.015*e; bl=0; }
+      else { const e=ez(Math.min(1,(d-1)/FADE)); o=1-.88*e; ty=-32*e; s=1-.05*e; bl=2.2*e; }
+      c.style.opacity=o.toFixed(3);
+      c.style.transform="translate3d(0,"+ty.toFixed(1)+"px,0) scale("+s.toFixed(3)+")";
+      c.style.filter=bl>.02?"blur("+bl.toFixed(2)+"px)":"none";
+    });
+    const hv=ez(Math.min(1,Math.max(0,f)/FADE));
+    head.style.opacity=hv.toFixed(3);
+    head.style.transform="translate3d(0,"+(10*(1-hv)).toFixed(1)+"px,0)";
+    fill.style.width=(pIn*100).toFixed(1)+"%";
+  }
+
+  let queued=false;
+  const onScroll=()=>{ if(queued)return; queued=true;
+    requestAnimationFrame(()=>{queued=false; apply();}); };
+  window.addEventListener("scroll",onScroll,{passive:true});
+  let tid=0;
+  window.addEventListener("resize",()=>{clearTimeout(tid);tid=setTimeout(()=>{sizeDeck();alignTop();apply();},180)});
+  sizeDeck(); alignTop(); apply();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{sizeDeck();alignTop();apply();});
+})();
+
+const SET=["Energia & utility","Finanza & banking","Assicurazioni","Telco","Retail","Automotive","Farmaceutico","Infrastrutture"];
+const COMP=["Concept & storytelling","Copywriting & ADV","Analisi & benchmark","Profilazione","UX writing","Social","Conversational","Traduzione","AI & prompting","Piano editoriale","Service design"];
+const WK=[
+ {s:0,c:["Analisi & benchmark","UX writing"],t:"Analisi di comunicazione.\nBenchmark su approccio comunicativo nella richiesta di consenso al trattamento dati: matrice livello di formalità × messaggio chiave, quattro quadranti con relativi casi studio."},
+ {s:0,c:["Concept & storytelling","Copywriting & ADV","Social","Piano editoriale"],t:"Produzione e gestione di contenuti social.\nConcept e produzione contenuti per campagne di comunicazione di aziende multiutility.\nDeclinazione per formati e canali, definizione piano editoriale, produzione contenuti e reportistica."},
+ {s:0,c:["Traduzione","UX writing","Analisi & benchmark"],t:"Website Redesign.\nReplatforming dei 11 siti satellite: raccolta requisiti, progettazione nuova architettura informativa, riscrittura, traduzione e monitoraggio delle attività di data entry."},
+ {s:0,c:["Concept & storytelling","AI & prompting"],t:"Luxury IoT App.\nDefinizione Tone of Voice a partire da brand identity e da studi di settore.\nProgettazione di un GPT assistente di scrittura addestrato a produrre copy in 3 lingue in base al tono di voce fornito."},
+ {s:0,c:["Piano editoriale","Copywriting & ADV","Traduzione"],t:"Piano editoriale per lancio nuovo prodotto.\nPiano editoriale bilingue per il lancio di un'app interna: cosa serve sapere prima, cosa dopo, cosa non va detto subito.\nProduzione dei contenuti."},
+ {s:0,c:["Analisi & benchmark","Concept & storytelling","UX writing"],t:"App di comunicazione aziendale interna.\nContenuti profilati e personalizzati estratti dai diversi canali aziendali.\nBenchmark, mappatura dei canali interni, definizione user stories/funzionalità, design dei contenuti e dell'experience d'uso."},
+ {s:0,c:["Copywriting & ADV","Concept & storytelling","UX writing"],t:"Campagna di promozione interna ed esterna sul tema elettrificazione.\nConcept e declinazione dei messaggi sui diversi canali e target + ideazione e prototipazione di campagna phygital."},
+ {s:1,c:["Copywriting & ADV"],t:"Banner pubblicitari - prestiti personali.\nSu base di un brief fornito dal cliente, produzione di copy per banner web riguardanti la promozione di prodotti bancari."},
+ {s:1,c:["Concept & storytelling","Profilazione","Copywriting & ADV"],t:"Banner pubblicitari per campagna di comunicazione di un prodotto bancario.\nConcept e declinazione del messaggio per i diversi target e per le diverse fasi di campagna."},
+ {s:1,c:["UX writing","Profilazione","Service design"],t:"Redesign dei flussi e dei contenuti profilati per la richiesta di prestiti online."},
+ {s:1,c:["Analisi & benchmark","Concept & storytelling","Social"],t:"Redesign dei contenuti social di una rivista di finanza.\nBenchmark, Concept e workshop per l'identificazione del posizionamento social di una rivista di finanza.\nSuccessiva definizione degli stream e formati di comunicazione social."},
+ {s:1,c:["Concept & storytelling","Profilazione"],t:"Sito web per un'agenzia di servizi alle imprese.\nConcept e definizione dei razionali di profilazione e scrittura contenuti profilati. Il sito web fornisce informazioni e funzionalità differenziate in base al profilo utente."},
+ {s:2,c:["Conversational","Analisi & benchmark","UX writing"],t:"Identità e personalità dei chatbot.\nDefinizione dell'identità di assistenti virtuali B2B e B2C del settore assicurativo: benchmark, naming, definizione della personalità e delle linee guida conversazionali."},
+ {s:2,c:["Copywriting & ADV","UX writing"],t:"Scrittura contenuti siti web.\nProduzione pagine web di prodotti assicurativi a partire da specifiche di prodotto."},
+ {s:2,c:["Analisi & benchmark"],t:"Mappatura as-is dei contenuti di un sito assicurativo per successivo redesign.\nValutazione di usabilità, trovabilità, azionabilità, valore per l'azienda ed effort."},
+ {s:3,c:["UX writing","Conversational"],t:"Copywriting per messaggi WhatsApp B2C.\nOttimizzazione degli script di assistenza su messaggistica: meno attriti, stesso tono."},
+ {s:3,c:["Copywriting & ADV","UX writing"],t:"Scrittura contenuti siti web.\nProduzione pagine web di telefonia mobile a partire da specifiche di prodotto."},
+ {s:3,c:["Profilazione","Copywriting & ADV"],t:"Linee guida per il sollecito telefonico.\nProduzione di linee guida (basate su profilazione utente) per operatori telefonici nella gestione delle fasi di sollecito dei bad-payers."},
+ {s:3,c:["Concept & storytelling","Profilazione"],t:"Pagine di prodotto per clienti corporate.\nConcept e produzione contenuti per la sezione imprese del sito web e per lo store digitale."},
+ {s:4,c:["UX writing"],t:"Microcopy per app.\nLabeling, CTA, istruzioni semplici, coerenti e in grado di realizzare l'experience desiderata e veicolare l'identità del brand."},
+ {s:4,c:["Concept & storytelling","Conversational","AI & prompting"],t:"Piattaforma di progettazione survey.\nConcept, tono di voce e progettazione degli step di interazione e degli output (risultati delle survey)."},
+ {s:4,c:["Copywriting & ADV","Profilazione"],t:"Riscrittura di Direct mail.\nOttimizzazione del messaggio per la pubblicizzazione di un servizio e successivo refinement a seguito della fase di test con gli utenti."},
+ {s:4,c:["Concept & storytelling"],t:"Redesign sito web.\nConcept, architettura dell'informazione, tono di voce e produzione dei contenuti."},
+ {s:5,c:["Traduzione","AI & prompting","Analisi & benchmark"],t:"Progettazione GPT di traduzione basato su brand voice per contenuti web/app.\nDefinizione linee guida di traduzione coerenti con brand identity.\nProduzione glossario.\nProgettazione e addestramento/refinement del GPT."},
+ {s:5,c:["Analisi & benchmark"],t:"Analisi di posizionamento.\nBenchmark, analisi di posizionamento dell'identità digitale di un brand di macchine agricole."},
+ {s:1,c:["Conversational","Analisi & benchmark"],t:"Chatbot redesign.\nBenchmark, analisi UX/UI di un chatbot B2C e definizione di azioni migliorative."},
+ {s:1,c:["Profilazione","Service design"],t:"Otto mindset di clienti e prospect costruiti su apertura al cambiamento × autonomia decisionale, con i materiali per testarli sul campo."},
+ {s:6,c:["Analisi & benchmark","UX writing"],t:"Redesign della intranet di una multinazionale.\nMappatura, definizione concept, architettura informativa e progettazione della nuova governance editoriale."},
+ {s:6,c:["Concept & storytelling","AI & prompting"],t:"Linee guida di scrittura in un processo omnicanale.\nLinee guida di scrittura dedicate a ciascun canale e fase del journey. Utilizzabili da content writer e da AI."},
+ {s:7,c:["Concept & storytelling","Piano editoriale","Copywriting & ADV"],t:"Campagna interna sulla sicurezza informatica.\nConcept, definizione di dieci stream editoriali, asset differenziati per reparto."},
+ {s:7,c:["Concept & storytelling","Copywriting & ADV"],t:"Campagna interna sul tema Whistleblowing.\nAnalisi dei freni psicologici, concept, definizione del piano editoriale e degli asset testuali."},
+ {s:4,c:["Concept & storytelling","UX writing"],t:"Virtual tour B2B.\nConcept e modello di navigazione di uno showroom virtuale: percorso libero di esplorazione dello spazio oppure selezione del proprio mercato di interesse, con contenuti dedicati tramite hotspot ad hoc."},
+ {s:5,c:["Concept & storytelling","UX writing"],t:"Redesign sito e blog di operatore colonnine elettriche.\nConcept di comunicazione, storytelling delle sezioni, tono di voce e riscrittura dei contenuti.\nDefinizione del piano editoriale del blog e produzione degli articoli in ottica SEO."},
+ {s:4,c:["Concept & storytelling"],t:"Sito di store fisico per abbigliamento su misura.\nConcept e storytelling per il sito dedicato al punto vendita di prodotti custom made di un brand di moda."}
+];
+const ALLC="\u0000all", ALLS=-1;
+let curC=ALLC, curS=ALLS;
+const cxSet=document.getElementById("cxSet"), cxComp=document.getElementById("cxComp"),
+      cxOut=document.getElementById("cxOut"), cxHead=document.getElementById("cxHead");
+
+const combo=(si,c)=>WK.some(w=>(si===ALLS||w.s===si)&&(c===ALLC||w.c.includes(c)));
+
+function cxChips(){
+  const FILL='<span class="cx-fill" aria-hidden="true"></span>';
+  const all=(sel,lab)=>`<button class="cx-all" data-all="1" aria-pressed="${sel}">${lab}</button>`;
+  cxComp.innerHTML=all(curC===ALLC,"Tutte")+COMP.map(c=>{
+    const ok=c===curC||combo(curS,c);
+    return `<button data-c="${c}" aria-pressed="${c===curC}"${ok?"":" disabled"}>${c}</button>`;
+  }).join("")+FILL;
+  cxSet.innerHTML=all(curS===ALLS,"Tutti")+SET.map((s,i)=>{
+    const ok=i===curS||combo(i,curC);
+    return `<button data-i="${i}" aria-pressed="${i===curS}"${ok?"":" disabled"}>${s}</button>`;
+  }).join("")+FILL;
+}
+
+cxComp.addEventListener("click",e=>{const b=e.target.closest("button");
+  if(!b||b.disabled)return; curC=b.dataset.all?ALLC:b.dataset.c; cxRender();});
+cxSet.addEventListener("click",e=>{const b=e.target.closest("button");
+  if(!b||b.disabled)return; curS=b.dataset.all?ALLS:+b.dataset.i; cxRender();});
+
+const PJ_GAP=26;
+function sizeCards(){
+  const W=cxOut.clientWidth;
+  if(W<180) return;
+  const w = W<620 ? Math.round(W*.78) : Math.floor((W-3*PJ_GAP)/3.35);
+  cxOut.style.setProperty("--pjw",w+"px");
+}
+(function(){
+  let down=false,moved=false,x0=0,sl0=0;
+  cxOut.addEventListener("pointerdown",e=>{
+    if(e.pointerType!=="mouse"||e.button!==0)return;
+    down=true;moved=false;x0=e.clientX;sl0=cxOut.scrollLeft;
+  });
+  cxOut.addEventListener("pointermove",e=>{
+    if(!down)return;
+    const dx=e.clientX-x0;
+    if(!moved&&Math.abs(dx)<4)return;
+    if(!moved){moved=true;cxOut.classList.add("dragging");cxOut.setPointerCapture(e.pointerId);}
+    cxOut.scrollLeft=sl0-dx;
+    e.preventDefault();
+  });
+  const up=e=>{
+    if(!down)return;
+    down=false;
+    if(moved){
+      cxOut.classList.remove("dragging");
+      try{cxOut.releasePointerCapture(e.pointerId);}catch(_){}
+    }
+  };
+  cxOut.addEventListener("pointerup",up);
+  cxOut.addEventListener("pointercancel",up);
+  cxOut.addEventListener("dragstart",e=>e.preventDefault());
+})();
+
+let pjTid=0;
+window.addEventListener("resize",()=>{clearTimeout(pjTid);pjTid=setTimeout(sizeCards,150)});
+
+function cxRender(){
+  cxChips();
+  const hits=WK.filter(w=>(curS===ALLS||w.s===curS)&&(curC===ALLC||w.c.includes(curC)));
+  const card=h=>{
+    const L=h.t.split("\n").map(x=>x.trim()).filter(Boolean);
+    const title=L.shift()||"";
+    return `<article class="pj"><span class="pj-t">${title}</span>${L.map(x=>`<span class="pj-d">${x}</span>`).join("")}</article>`;
+  };
+  const labC=curC===ALLC?"Tutte le competenze":curC;
+  const labS=curS===ALLS?"Tutti i settori":SET[curS];
+  cxHead.innerHTML=`${labC}<span>×</span>${labS}`;
+  cxOut.innerHTML=hits.map(card).join("");
+  cxOut.scrollLeft=0;
+  sizeCards();
+}
+cxRender();
+
+(function(){
+  const sec=document.getElementById("works");
+  if(!sec) return;
+  const fold=sec.querySelector(".wk-fold"), inner=sec.querySelector(".wk-fold-in");
+  if(!fold||!inner) return;
+  const mob=()=>matchMedia("(max-width:900px)").matches;
+  let H=0;
+
+  function measure(){
+    if(!mob()){
+      sec.style.removeProperty("--foldH");
+      fold.style.height=""; inner.style.transform=""; H=0; return;
+    }
+    fold.style.height="auto"; inner.style.transform="none";
+    H=inner.offsetHeight;                      
+    sec.style.setProperty("--foldH",H+"px");
+    apply();
+    if(window.EMERGE_RECOMPUTE) window.EMERGE_RECOMPUTE();
+  }
+  function apply(){
+    if(!mob()||!H) return;
+    const p=Math.min(1,Math.max(0,(window.scrollY-sec.offsetTop)/H));
+    fold.style.height=Math.round(H*(1-p))+"px";
+    inner.style.transform="translateY("+(-Math.round(H*p))+"px)";
+  }
+  let q=false;
+  addEventListener("scroll",()=>{ if(q)return; q=true;
+    requestAnimationFrame(()=>{q=false;apply();}); },{passive:true});
+  let t=0;
+  addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(measure,180)});
+  measure();
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(measure);
+})();
+
+(function(){
+  const secs=[...document.querySelectorAll(".vp")].filter(s=>!s.classList.contains("first"));
+  const items=secs.map(sec=>{
+    let blocks;
+    if(sec.id==="works") blocks=[sec.querySelector(".wk")];
+    else if(sec.id==="pin") blocks=[sec.querySelector(".pin-grid > .hold"), sec.querySelector(".deep")];
+    else blocks=[sec.querySelector(".hold")];
+    blocks=blocks.filter(Boolean);
+    blocks.forEach(b=>b.classList.add("emerge"));
+    return {sec,blocks,trig:-1,wait:0,done:false};
+  });
+
+  const gDoc=y=>PIN_FZ? y-Math.min(Math.max(0,y-PIN_TOP),PIN_FZ) : y;
+
+  function computeTriggers(){
+    if(!pathY.length) return;
+    nodes.forEach(n=>{n.noLabel=false;});   
+    for(const it of items){
+      const y = it.sec.offsetTop
+              + Math.min(it.sec.offsetHeight,window.innerHeight)*.5;
+      const c=gDoc(y);
+      let lo=0,hi=pathY.length-1,res=0;
+      while(lo<=hi){const m=(lo+hi)>>1; if(pathY[m]<=c){res=m;lo=m+1}else hi=m-1;}
+      if(nodes[path[res]]&&nodes[path[res]].hub){
+        if(res+1<path.length&&!nodes[path[res+1]].hub) res++;
+        else if(res>0&&!nodes[path[res-1]].hub) res--;
+      }
+      it.trig=res;
+      const tn=nodes[path[res]];
+      if(tn) tn.noLabel=true;
+    }
+  }
+
+  function reveal(it){
+    if(it.done) return;
+    it.done=true;
+    const k=Math.min(Math.max(0,it.trig),path.length-1);
+    const n=nodes[path[k]];
+
+    it.blocks.forEach(b=>{
+      b.style.transition="none";
+      b.style.transform="none";
+      const r=b.getBoundingClientRect();
+      b.style.transform="";                    
+      if(r.width&&r.height){
+        b.style.setProperty("--ox",((n.x-r.left)/r.width*100).toFixed(1)+"%");
+        b.style.setProperty("--oy",((n.y-r.top)/r.height*100).toFixed(1)+"%");
+      }
+      void b.offsetWidth;                      
+      b.style.transition="";                   
+    });
+
+    if(typeof SCROLL_HOLD==="function") SCROLL_HOLD(it.sec.offsetTop,330,880);
+
+    requestAnimationFrame(()=>{
+      it.sec.classList.add("on");
+      PULSE.push({n:path[k],t0:performance.now()});
+    });
+  }
+
+  function collapse(it){
+    const k=Math.min(Math.max(0,it.trig),path.length-1);
+    const n=nodes[path[k]];
+    it.blocks.forEach(b=>{
+      const r=b.getBoundingClientRect();
+      if(!r.width||!r.height) return;
+      b.style.setProperty("--ox",((n.x-r.left)/r.width*100).toFixed(1)+"%");
+      b.style.setProperty("--oy",((n.y-r.top)/r.height*100).toFixed(1)+"%");
+    });
+    it.sec.classList.remove("on");
+    it.done=false; it.wait=0;
+  }
+
+  function tick(){
+    const H=window.innerHeight;
+    for(const it of items){
+      if(it.trig<0) continue;
+      if(it.done){
+        if(wi<=it.trig-2) collapse(it);
+        continue;
+      }
+      const r=it.sec.getBoundingClientRect();
+      const centrata = r.top < H*.42 && r.bottom > H*.58;
+      if(!centrata){ it.wait=0; continue; }
+      if(wi>=it.trig){ reveal(it); continue; }
+      if(++it.wait>260) reveal(it);
+    }
+  }
+  window.EMERGE_RECOMPUTE=computeTriggers;
+  window.EMERGE_TICK=tick;
+  computeTriggers();
+})();
+
+</script>
+</body>
+</html>
