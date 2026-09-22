@@ -246,17 +246,28 @@ p.t.lead{font-size:clamp(16.5px,1.9vw,19.5px)}
   .card:last-child{margin-bottom:0}
 }
 
+#lang{position:fixed;top:20px;right:22px;z-index:60;display:flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em}
+#lang button{font:inherit;letter-spacing:inherit;background:none;border:0;padding:4px 1px;
+  cursor:pointer;color:var(--ink2);transition:color .15s}
+#lang button:hover{color:var(--ink)}
+#lang button[aria-pressed="true"]{color:var(--walk)}
+#lang i{font-style:normal;color:var(--line)}
+@media (max-width:700px){#lang{top:13px;right:14px;font-size:10px;gap:7px}}
+
 @media (prefers-reduced-motion:reduce){.rise{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body>
+
+<nav id="lang" aria-label="Language"><button type="button" data-l="it" aria-pressed="true">IT</button><i>/</i><button type="button" data-l="en" aria-pressed="false">EN</button></nav>
 
 <canvas id="gcv" aria-hidden="true"></canvas>
 <nav class="rail" id="rail" aria-hidden="true"></nav>
 
 <section class="vp sc first" id="first">
   <div class="inner"><div class="hold">
-    <h1 class="hero">Tutto questo, ridotto a<br><span class="hl">una pagina</span>.</h1>
+    <h1 class="hero" data-i18n="hero">Tutto questo, ridotto a<br><span class="hl">una pagina</span>.</h1>
     <p class="cue">Salvatore Mazzacano · Content Designer</p>
   </div></div>
 </section>
@@ -267,27 +278,27 @@ p.t.lead{font-size:clamp(16.5px,1.9vw,19.5px)}
 
       <div class="hold">
         <p class="tag rise">01</p>
-        <h2 class="rise">Il mio profilo professionale non l'ho scritto io. <span class="hl">L'ho fatto emergere</span>.</h2>
-        <p class="t lead rise" id="lead">Questo testo l'ha scritto l'AI. Non le ho dato documenti da riassumere: le ho fatto costruire una rete in cui ogni progetto e ogni passione, ogni nota extra lavoro è correlata alle altre. Poi le ho chiesto che professionista ci vedeva.</p>
-        <p class="t rise">Non una pagina che mi descrive. Una pagina derivata da me.</p>
+        <h2 class="rise" data-i18n="pin-h2">Il mio profilo professionale non l'ho scritto io. <span class="hl">L'ho fatto emergere</span>.</h2>
+        <p class="t lead rise" id="lead" data-i18n="pin-lead">Questo testo l'ha scritto l'AI. Non le ho dato documenti da riassumere: le ho fatto costruire una rete in cui ogni progetto e ogni passione, ogni nota extra lavoro è correlata alle altre. Poi le ho chiesto che professionista ci vedeva.</p>
+        <p class="t rise" data-i18n="pin-p2">Non una pagina che mi descrive. Una pagina derivata da me.</p>
       </div>
 
       <div class="deep">
         <div class="deck" id="deck">
 
           <article class="card">
-            <h4>Un profilo professionale estratto da una rete neurale</h4>
-            <p>Non ho chiesto «scrivimi un sito». Ho chiesto di analizzare progetti, riflessioni e creazioni, trovarci nodi e concetti comuni — la mia rete di pensiero — e solo dopo farne un profilo.</p>
+            <h4 data-i18n="card1-h">Un profilo professionale estratto da una rete neurale</h4>
+            <p data-i18n="card1-p">Non ho chiesto «scrivimi un sito». Ho chiesto di analizzare progetti, riflessioni e creazioni, trovarci nodi e concetti comuni — la mia rete di pensiero — e solo dopo farne un profilo.</p>
           </article>
 
           <article class="card">
-            <h4>Libreria vs. Grafo</h4>
-            <p>Una libreria di file è muta: si sa dov'è ogni cosa, non cosa c'entra un file con un altro. Qui i collegamenti sono la parte che conta. Una libreria raccoglie documenti, un grafo ne coglie il senso.</p>
+            <h4 data-i18n="card2-h">Libreria vs. Grafo</h4>
+            <p data-i18n="card2-p">Una libreria di file è muta: si sa dov'è ogni cosa, non cosa c'entra un file con un altro. Qui i collegamenti sono la parte che conta. Una libreria raccoglie documenti, un grafo ne coglie il senso.</p>
           </article>
 
           <article class="card">
-            <h4>Non ciò che faccio, ma ciò che sono</h4>
-            <p>Quello che faccio e penso fuori dal lavoro non sono curiosità a margine: è qui che le qualità che porto nel lavoro trovano linfa. Le idee più fertili nascono da relazioni inafferrabili tra tanti piccoli bit.</p>
+            <h4 data-i18n="card3-h">Non ciò che faccio, ma ciò che sono</h4>
+            <p data-i18n="card3-p">Quello che faccio e penso fuori dal lavoro non sono curiosità a margine: è qui che le qualità che porto nel lavoro trovano linfa. Le idee più fertili nascono da relazioni inafferrabili tra tanti piccoli bit.</p>
           </article>
 
         </div>
@@ -303,9 +314,9 @@ p.t.lead{font-size:clamp(16.5px,1.9vw,19.5px)}
 <section class="vp sc">
   <div class="inner"><div class="hold">
     <p class="tag rise">02</p>
-    <h2 class="rise">Quello che ho fatto qui è quello che faccio da <span class="hl">quindici anni</span>.</h2>
-    <p class="t lead rise">Rendere esplicito ciò che resta implicito, dargli una struttura, e solo alla fine scegliere la forma. Cambia il soggetto — un'azienda, un prodotto, io — non cambia il metodo.</p>
-    <p class="t rise">Questo portfolio, per come è concepito, non racconta il mio lavoro: è il mio lavoro. Il valore non sta nelle pagine che vedi, sta nell'idea che le ha rese possibili.</p>
+    <h2 class="rise" data-i18n="s2-h2">Quello che ho fatto qui è quello che faccio da <span class="hl">quindici anni</span>.</h2>
+    <p class="t lead rise" data-i18n="s2-lead">Rendere esplicito ciò che resta implicito, dargli una struttura, e solo alla fine scegliere la forma. Cambia il soggetto — un'azienda, un prodotto, io — non cambia il metodo.</p>
+    <p class="t rise" data-i18n="s2-p">Questo portfolio, per come è concepito, non racconta il mio lavoro: è il mio lavoro. Il valore non sta nelle pagine che vedi, sta nell'idea che le ha rese possibili.</p>
   </div></div>
 </section>
 
@@ -314,17 +325,17 @@ p.t.lead{font-size:clamp(16.5px,1.9vw,19.5px)}
     <div class="wk">
 
       <div class="wk-intro hold">
-        <h2 class="rise">Avvicino le <span class="hl">aziende</span> alle <span class="hl">persone</span>.</h2>
+        <h2 class="rise" data-i18n="wk-h2">Avvicino le <span class="hl">aziende</span> alle <span class="hl">persone</span>.</h2>
         <div class="wk-fold"><div class="wk-fold-in">
-        <p class="wk-sub rise">Quindici anni di comunicazione professionale in nove settori.</p>
-        <p class="t rise"><b>Perito meccanico</b>, poi <b>disegno industriale</b> all'università, poi sette anni da <b>assistente fotografo</b> di architettura e still life, operatore <b>call center</b>, <b>moderatore di community</b>, poi <b>scrittura</b> e gestione contenuti, poi <b>strategia</b>.</p>
-        <p class="t rise">Continuo a evolvere come il mio mestiere.</p>
+        <p class="wk-sub rise" data-i18n="wk-sub">Quindici anni di comunicazione professionale in nove settori.</p>
+        <p class="t rise" data-i18n="wk-career"><b>Perito meccanico</b>, poi <b>disegno industriale</b> all'università, poi sette anni da <b>assistente fotografo</b> di architettura e still life, operatore <b>call center</b>, <b>moderatore di community</b>, poi <b>scrittura</b> e gestione contenuti, poi <b>strategia</b>.</p>
+        <p class="t rise" data-i18n="wk-p">Continuo a evolvere come il mio mestiere.</p>
         </div></div>
 
       <div class="wk-band rise">
         <div class="wk-filters">
-          <div class="cx-row"><p class="cx-lab">Competenze</p><div class="cx-chips" id="cxComp"></div></div>
-          <div class="cx-row"><p class="cx-lab">Settori</p><div class="cx-chips" id="cxSet"></div></div>
+          <div class="cx-row"><p class="cx-lab" data-i18n="lab-comp">Competenze</p><div class="cx-chips" id="cxComp"></div></div>
+          <div class="cx-row"><p class="cx-lab" data-i18n="lab-set">Settori</p><div class="cx-chips" id="cxSet"></div></div>
         </div>
         <div class="wk-out">
           <p class="cx-head" id="cxHead"></p>
@@ -339,39 +350,39 @@ p.t.lead{font-size:clamp(16.5px,1.9vw,19.5px)}
 <section class="vp sc">
   <div class="inner"><div class="hold">
     <p class="tag rise">03</p>
-    <h2 class="rise">Quello che i progetti <span class="hl">non dicono</span>.</h2>
-    <p class="t lead rise">Ora leggerai delle qualità che non mi sarei attribuito. Nessun progetto, da solo, le dimostra: sono emerse dai collegamenti, guardando insieme cose che tra loro non c'entravano niente.</p>
+    <h2 class="rise" data-i18n="s3-h2">Quello che i progetti <span class="hl">non dicono</span>.</h2>
+    <p class="t lead rise" data-i18n="s3-lead">Ora leggerai delle qualità che non mi sarei attribuito. Nessun progetto, da solo, le dimostra: sono emerse dai collegamenti, guardando insieme cose che tra loro non c'entravano niente.</p>
   </div></div>
 </section>
 
 <section class="vp sc">
   <div class="inner"><div class="hold">
-    <h3 class="rise">Un'emozione è un effetto. Da qualche parte c'è la causa.</h3>
-    <p class="t rise">Un'emozione non arriva per caso: qualcosa l'ha prodotta, e mi interessa risalire a quel qualcosa — nelle mie emozioni come in quelle degli altri. Chi comunica lavora su questo: non su cosa dire, ma su cosa fa scattare qualcosa in chi ascolta.</p>
+    <h3 class="rise" data-i18n="o1-h">Un'emozione è un effetto. Da qualche parte c'è la causa.</h3>
+    <p class="t rise" data-i18n="o1-p">Un'emozione non arriva per caso: qualcosa l'ha prodotta, e mi interessa risalire a quel qualcosa — nelle mie emozioni come in quelle degli altri. Chi comunica lavora su questo: non su cosa dire, ma su cosa fa scattare qualcosa in chi ascolta.</p>
   </div></div>
 </section>
 
 <section class="vp sc">
   <div class="inner"><div class="hold">
-    <h3 class="rise">Prima di dire che una cosa è superata, capisco perché ha funzionato.</h3>
-    <p class="t rise">Cambiare le cose, essere diversi, ha senso quando cambiano le condizioni. Vale per gli oggetti e vale per le persone: prima di chiedere a qualcuno di cambiare abitudine, mi interessa capire cosa tiene in piedi quella che ha già.</p>
+    <h3 class="rise" data-i18n="o2-h">Prima di dire che una cosa è superata, capisco perché ha funzionato.</h3>
+    <p class="t rise" data-i18n="o2-p">Cambiare le cose, essere diversi, ha senso quando cambiano le condizioni. Vale per gli oggetti e vale per le persone: prima di chiedere a qualcuno di cambiare abitudine, mi interessa capire cosa tiene in piedi quella che ha già.</p>
   </div></div>
 </section>
 
 <section class="vp sc">
   <div class="inner"><div class="hold">
-    <h3 class="rise">Un'idea che sta in piedi è leggera.</h3>
-    <p class="t rise">Sul lavoro ci si traveste per sentirsi sicuri: pose, gerghi, toni solenni. Io mi fido dell'opposto. Sei certo di una cosa solo se ne conosci le crepe: allora puoi riderne. La sicurezza è leggerezza.</p>
-    <p class="t rise">Poi c'è la parte pratica: l'ironia disarma, attira, e stimola attenzione. Per questo la uso proprio dove tutti si irrigidiscono.</p>
+    <h3 class="rise" data-i18n="o3-h">Un'idea che sta in piedi è leggera.</h3>
+    <p class="t rise" data-i18n="o3-p1">Sul lavoro ci si traveste per sentirsi sicuri: pose, gerghi, toni solenni. Io mi fido dell'opposto. Sei certo di una cosa solo se ne conosci le crepe: allora puoi riderne. La sicurezza è leggerezza.</p>
+    <p class="t rise" data-i18n="o3-p2">Poi c'è la parte pratica: l'ironia disarma, attira, e stimola attenzione. Per questo la uso proprio dove tutti si irrigidiscono.</p>
   </div></div>
 </section>
 
 <section class="vp sc">
   <div class="inner"><div class="hold">
     <p class="tag rise">04</p>
-    <h2 class="rise">Ho smesso di raccontarmi. <span class="hl">Mi sono fatto leggere</span>.</h2>
-    <p class="t lead rise">Questa pagina non è il portfolio del mio lavoro: ne è l'esito. Il valore che porto non è saper scrivere bene una pagina: è aver concepito che una pagina può essere dedotta così, e averla fatta.</p>
-    <p class="t rise">L'idea è mia. La sintesi è sua. L'opinione è tua.</p>
+    <h2 class="rise" data-i18n="s4-h2">Ho smesso di raccontarmi. <span class="hl">Mi sono fatto leggere</span>.</h2>
+    <p class="t lead rise" data-i18n="s4-lead">Questa pagina non è il portfolio del mio lavoro: ne è l'esito. Il valore che porto non è saper scrivere bene una pagina: è aver concepito che una pagina può essere dedotta così, e averla fatta.</p>
+    <p class="t rise" data-i18n="s4-p">L'idea è mia. La sintesi è sua. L'opinione è tua.</p>
     <div class="sign rise"><b>Salvatore Mazzacano</b> · Content Designer</div>
   </div></div>
 </section>
@@ -411,6 +422,49 @@ const W_PENSIERI=[
 "paragrafo d'apertura"];
 
 const HUBS=["LAVORO","VITA","PENSIERI"];
+const W_EN={"mappa dei contenuti": "content map", "tono di voce": "tone of voice", "matrice di posizionamento": "positioning matrix", "test di usabilità": "usability testing", "albero di navigazione": "navigation tree", "modello di governance": "governance model", "calendario editoriale": "editorial calendar", "naming di prodotto": "product naming", "microtesti": "microcopy", "stati di errore": "error states", "primo accesso": "first-run experience", "messaggi di conferma": "confirmation messages", "analisi comparativa": "comparative analysis", "segmentazione": "segmentation", "funnel di adozione": "adoption funnel", "architettura dell'informazione": "information architecture", "linee guida di scrittura": "writing guidelines", "glossario condiviso": "shared glossary", "brief e controbrief": "brief and counter-brief", "varianti a confronto": "variants side by side", "etichette dei pulsanti": "button labels", "coerenza tra canali": "cross-channel consistency", "adattamento locale": "local adaptation", "doppia lingua": "bilingual copy", "titolazione": "headline writing", "chiamata all'azione": "call to action", "messaggi di sistema": "system messages", "comunicazione interna": "internal communication", "piano editoriale": "editorial plan", "tono nelle emergenze": "tone in a crisis", "cupole geodetiche": "geodesic domes", "tipografia da insegna": "sign painting", "incastri del legno": "wood joinery", "segnaletica di montagna": "mountain waymarking", "attrezzi da officina": "workshop tools", "tessiture a telaio": "loom weaving", "ceramica smaltata": "glazed ceramics", "gru portuali": "harbour cranes", "ponteggi": "scaffolding", "orologi meccanici": "mechanical watches", "cinghie e pulegge": "belts and pulleys", "volte a botte": "barrel vaults", "scale elicoidali": "helical stairs", "nodi marinari": "sailor's knots", "fusioni in ghisa": "cast iron", "rilegature": "bookbinding", "catene di montaggio": "assembly lines", "antenne paraboliche": "satellite dishes", "insegne al neon": "neon signs", "binari e scambi": "rails and switches", "mulini a vento": "windmills", "fari costieri": "lighthouses", "modelli in scala": "scale models", "carte nautiche": "nautical charts", "clessidre": "hourglasses", "luce radente": "raking light", "meccanica dei fluidi": "fluid mechanics", "ombre portate": "cast shadows", "cartografia storica": "historical cartography", "ritmi in levare": "offbeat rhythms", "notazione musicale": "musical notation", "cristallografia": "crystallography", "spirali logaritmiche": "logarithmic spirals", "reticoli e trame": "lattices and weaves", "maree e correnti": "tides and currents", "fotogrammetria": "photogrammetry", "esposizione lunga": "long exposure", "densità informativa": "information density", "gerarchia tipografica": "typographic hierarchy", "ritmo della lettura": "reading rhythm", "metriche di chiarezza": "clarity metrics", "criteri di valutazione": "evaluation criteria", "ricerca sul campo": "field research", "sintesi": "synthesis", "riscrittura": "rewriting", "prova di lettura": "read-aloud test", "accessibilità del testo": "text accessibility", "paragrafo d'apertura": "opening paragraph", "LAVORO": "WORK", "VITA": "LIFE", "PENSIERI": "THOUGHTS"};
+const SET_EN=["Energy & utilities", "Finance & banking", "Insurance", "Telco", "Retail", "Automotive", "Pharma", "Infrastructure"];
+const COMP_EN=["Concept & storytelling", "Copywriting & advertising", "Analysis & benchmarking", "User profiling", "UX writing", "Social", "Conversational", "Translation", "AI & prompting", "Editorial planning", "Service design"];
+const WK_EN=[
+"Communication analysis.\nBenchmark of how consent to data processing is asked for: a matrix of formality level × key message, four quadrants with case studies for each.",
+"Social content production and management.\nConcept and content production for multi-utility communication campaigns.\nAdaptation across formats and channels, editorial planning, content production and reporting.",
+"Website redesign.\nReplatforming of the group's satellite sites: requirements gathering, new information architecture, rewriting, translation and oversight of the data entry work.",
+"Luxury IoT app.\nTone of voice defined from the brand identity and sector research.\nDesign of a writing-assistant GPT trained to produce copy in three languages according to that tone of voice.",
+"Editorial plan for a product launch.\nBilingual editorial plan for the launch of an internal app: what people need to know first, what comes later, what shouldn't be said straight away.\nContent production.",
+"Internal company communication app.\nProfiled, personalised content pulled from the various company channels.\nBenchmark, mapping of internal channels, user stories and features, content and experience design.",
+"Internal and external campaign on electrification.\nConcept and adaptation of the messages across channels and audiences, plus the idea and prototype for a phygital campaign.",
+"Display advertising — personal loans.\nWorking from a client brief, copy for web banners promoting banking products.",
+"Display advertising for a banking product campaign.\nConcept and adaptation of the message for different audiences and different phases of the campaign.",
+"Redesign of the flows and profiled content for online loan applications.",
+"Social content redesign for a finance magazine.\nBenchmark, concept and workshop to define the magazine's social positioning.\nThen the definition of content streams and formats.",
+"Website for a business services agency.\nConcept, profiling rationale and profiled content. The site serves different information and features depending on the user's profile.",
+"Chatbot identity and personality.\nIdentity for B2B and B2C virtual assistants in insurance: benchmark, naming, personality and conversational guidelines.",
+"Website content writing.\nProduct pages for insurance products, written from product specifications.",
+"As-is content mapping of an insurance website ahead of a redesign.\nEach piece assessed for usability, findability, actionability, business value and effort.",
+"Copywriting for B2C WhatsApp messages.\nOptimisation of support scripts on messaging: less friction, same tone.",
+"Website content writing.\nProduct pages for mobile telephony, written from product specifications.",
+"Guidelines for collection calls.\nGuidelines based on user profiling for phone agents handling the payment recovery stages.",
+"Product pages for corporate customers.\nConcept and content for the business section of the website and for the digital store.",
+"App microcopy.\nLabels, CTAs and instructions that stay simple and consistent, deliver the intended experience and carry the brand's identity.",
+"Survey design platform.\nConcept, tone of voice and design of the interaction steps and of the outputs, the survey results.",
+"Direct mail rewriting.\nOptimisation of the message promoting a service, then refined again after user testing.",
+"Website redesign.\nConcept, information architecture, tone of voice and content production.",
+"Design of a translation GPT built on brand voice for web and app content.\nTranslation guidelines consistent with the brand identity.\nGlossary production.\nDesign, training and refinement of the GPT.",
+"Positioning analysis.\nBenchmark and positioning analysis of the digital identity of an industrial machinery brand.",
+"Chatbot redesign.\nBenchmark, UX/UI analysis of a B2C chatbot and a set of improvements.",
+"Eight customer and prospect mindsets built on openness to change × decision-making autonomy, with the materials to test them in the field.",
+"Intranet redesign for a multinational.\nMapping, concept, information architecture and design of the new editorial governance.",
+"Writing guidelines for an omnichannel process.\nGuidelines for each channel and each stage of the journey. Usable by content writers and by AI alike.",
+"Internal campaign on information security.\nConcept, ten editorial streams, assets tailored to each department.",
+"Internal campaign on whistleblowing.\nAnalysis of what holds people back, concept, editorial plan and text assets.",
+"B2B virtual tour.\nConcept and navigation model for a virtual showroom: either roam the space freely or pick your own market, with dedicated content through purpose-built hotspots.",
+"Website and blog redesign for an energy operator.\nCommunication concept, storytelling for each section, tone of voice and full rewrite.\nBlog editorial plan and SEO-oriented articles.",
+"Website for a made-to-measure clothing store.\nConcept and storytelling for the site of a fashion brand's custom-made retail space."
+];
+const LG=()=>window.LANG||"it";
+const labComp=c=>LG()==="it"?c:(COMP_EN[COMP.indexOf(c)]||c);
+const labSet=i=>LG()==="it"?SET[i]:(SET_EN[i]||SET[i]);
+const cardTxt=h=>{ const i=WK.indexOf(h); return LG()==="it"?h.t:(WK_EN[i]||h.t); };
 const POOLS=[W_LAVORO,W_VITA,W_PENSIERI];
 
 let PIN=null, PIN_TOP=0, PIN_FZ=0;
@@ -458,7 +512,7 @@ const seed=HUBS.map((t,g)=>({t,g,hub:true})).concat(picks);
 const N=seed.length;
 
 const nodes=seed.map((o,i)=>({
-  t:o.t, g:o.g, hub:!!o.hub, i, x:0,y:0,vx:0,vy:0,ax:0,ay:0,tx:0,tb:0,ox:0,oy:0,
+  t:o.t, it:o.t, en:(W_EN[o.t]||o.t), g:o.g, hub:!!o.hub, i, x:0,y:0,vx:0,vy:0,ax:0,ay:0,tx:0,tb:0,ox:0,oy:0,
   born:-1,pop:0,nb:[],nb2:[],
   ph:Math.random()*6.283,  w:.00042+Math.random()*.00026,
   ph2:Math.random()*6.283, w2:.00039+Math.random()*.00028,
@@ -979,6 +1033,7 @@ requestAnimationFrame(frame);
   let tid=0;
   window.addEventListener("resize",()=>{clearTimeout(tid);tid=setTimeout(()=>{sizeDeck();alignTop();apply();},180)});
   sizeDeck(); alignTop(); apply();
+  window.PIN_REMEASURE=()=>{sizeDeck();alignTop();apply();};
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(()=>{sizeDeck();alignTop();apply();});
 })();
 
@@ -1030,13 +1085,13 @@ const combo=(si,c)=>WK.some(w=>(si===ALLS||w.s===si)&&(c===ALLC||w.c.includes(c)
 function cxChips(){
   const FILL='<span class="cx-fill" aria-hidden="true"></span>';
   const all=(sel,lab)=>`<button class="cx-all" data-all="1" aria-pressed="${sel}">${lab}</button>`;
-  cxComp.innerHTML=all(curC===ALLC,"Tutte")+COMP.map(c=>{
+  cxComp.innerHTML=all(curC===ALLC,LG()==="it"?"Tutte":"All")+COMP.map(c=>{
     const ok=c===curC||combo(curS,c);
-    return `<button data-c="${c}" aria-pressed="${c===curC}"${ok?"":" disabled"}>${c}</button>`;
+    return `<button data-c="${c}" aria-pressed="${c===curC}"${ok?"":" disabled"}>${labComp(c)}</button>`;
   }).join("")+FILL;
-  cxSet.innerHTML=all(curS===ALLS,"Tutti")+SET.map((s,i)=>{
+  cxSet.innerHTML=all(curS===ALLS,LG()==="it"?"Tutti":"All")+SET.map((s,i)=>{
     const ok=i===curS||combo(i,curC);
-    return `<button data-i="${i}" aria-pressed="${i===curS}"${ok?"":" disabled"}>${s}</button>`;
+    return `<button data-i="${i}" aria-pressed="${i===curS}"${ok?"":" disabled"}>${labSet(i)}</button>`;
   }).join("")+FILL;
 }
 
@@ -1086,12 +1141,12 @@ function cxRender(){
   cxChips();
   const hits=WK.filter(w=>(curS===ALLS||w.s===curS)&&(curC===ALLC||w.c.includes(curC)));
   const card=h=>{
-    const L=h.t.split("\n").map(x=>x.trim()).filter(Boolean);
+    const L=cardTxt(h).split("\n").map(x=>x.trim()).filter(Boolean);
     const title=L.shift()||"";
     return `<article class="pj"><span class="pj-t">${title}</span>${L.map(x=>`<span class="pj-d">${x}</span>`).join("")}</article>`;
   };
-  const labC=curC===ALLC?"Tutte le competenze":curC;
-  const labS=curS===ALLS?"Tutti i settori":SET[curS];
+  const labC=curC===ALLC?(LG()==="it"?"Tutte le competenze":"All skills"):labComp(curC);
+  const labS=curS===ALLS?(LG()==="it"?"Tutti i settori":"All sectors"):labSet(curS);
   cxHead.innerHTML=`${labC}<span>×</span>${labS}`;
   cxOut.innerHTML=hits.map(card).join("");
   cxOut.scrollLeft=0;
@@ -1130,6 +1185,7 @@ cxRender();
   let t=0;
   addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(measure,180)});
   measure();
+  window.FOLD_REMEASURE=measure;
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(measure);
 })();
 
@@ -1226,6 +1282,57 @@ cxRender();
   computeTriggers();
 })();
 
+
+const I18N={
+ "hero": "This whole web,<br><span class=\"hl\">in one page</span>.",
+ "pin-h2": "Nobody built my portfolio. <span class=\"hl\">It just took shape</span>.",
+ "pin-lead": "An AI wrote this page. I didn't hand it documents to summarise: I had it build a network where every project, every interest and every thought beyond work is connected to the others. Then I asked what kind of professional it could see in there.",
+ "pin-p2": "Not written about me. Inferred from me.",
+ "card1-h": "A professional profile drawn out of a neural network",
+ "card1-p": "I didn't ask it to \"write my website\". I asked it to look across my projects, notes and things I'd made, from work and beyond, find the recurring ideas and connections between them, and only then turn that into a profile.",
+ "card2-h": "Library vs. graph",
+ "card2-p": "A library of files tells you nothing: you know where everything is, not how one file relates to another. Here the links are the part that matters. A library collects documents; a graph catches what they mean.",
+ "card3-h": "Less a résumé, more a fingerprint.",
+ "card3-p": "What I do and think outside work isn't a set of side interests: it's where the qualities I bring to work are fed. The most fertile ideas come from connections that are hard to pin down, between a lot of small pieces.",
+ "s2-h2": "What I've done here is what I've been doing for <span class=\"hl\">fifteen years</span>.",
+ "s2-lead": "Making the implicit explicit, giving it structure, and only then choosing the form. The subject changes — a company, a product, me. The method doesn't.",
+ "s2-p": "This portfolio doesn't describe my work. It is my work. What matters isn't the pages you're reading. It's the idea behind them.",
+ "wk-h2": "I bring <span class=\"hl\">companies</span> closer to <span class=\"hl\">people</span>.",
+ "wk-sub": "Fifteen years of professional communication across nine sectors.",
+ "wk-career": "<b>Mechanical technician</b>, then <b>industrial design</b> at university, then seven years as an <b>assistant photographer</b> in architecture and still life, <b>call centre</b> agent, <b>community moderator</b>, then <b>writing</b> and content management, then <b>strategy</b>.",
+ "wk-p": "Still evolving, just like my job.",
+ "s3-h2": "What the projects <span class=\"hl\">leave unsaid</span>.",
+ "s3-lead": "What follows are qualities I wouldn't have claimed for myself. No single project proves them: they came out of the links, from looking at things that had nothing to do with one another side by side.",
+ "o1-h": "Every emotion is an effect. I go looking for the cause.",
+ "o1-p": "Emotions never come out of nowhere. There's always a trigger, and I want to find it, in my own feelings and in other people's. That's the real work of communication: not deciding what to say, but understanding what will move the person on the other end.",
+ "o2-h": "Before calling something outdated, I figure out why it worked.",
+ "o2-p": "Changing things, doing them differently, makes sense when the conditions change. That holds for objects and for people: before asking someone to drop a habit, I want to understand what is holding up the one they already have.",
+ "o3-h": "I take ideas seriously. Not myself.",
+ "o3-p1": "At work, people dress up to feel safe: poses, jargon, solemn tones. I trust the opposite. You're only sure of something once you know where its cracks are — and then you can laugh about it. Confidence is lightness.",
+ "o3-p2": "Then there's the practical side: humor disarms, draws people in, and holds their attention. That's why I use it exactly where everyone else tenses up.",
+ "s4-h2": "I stopped writing about me. <span class=\"hl\">I let myself be read</span>.",
+ "s4-lead": "This page doesn't show my work. It is the outcome of it. My value isn't in writing a good page. It's in imagining that content could be derived like this — and then making it happen.",
+ "s4-p": "The idea is mine. The synthesis is the AI's. The opinion is yours.",
+ "lab-comp": "Skills",
+ "lab-set": "Sectors"
+};
+(function(){
+  const root=document.documentElement, bar=document.getElementById("lang");
+  const els=[...document.querySelectorAll("[data-i18n]")];
+  const IT={}; els.forEach(e=>{IT[e.dataset.i18n]=e.innerHTML;});
+  window.LANG="it";
+  function setLang(l){
+    if(l===window.LANG) return;
+    window.LANG=l; root.setAttribute("lang",l);
+    els.forEach(e=>{const k=e.dataset.i18n; e.innerHTML = l==="it"?IT[k]:(I18N[k]||IT[k]);});
+    if(typeof nodes!=="undefined") nodes.forEach(n=>{ n.t = l==="it"?n.it:n.en; });
+    if(typeof cxRender==="function") cxRender();
+    if(window.PIN_REMEASURE) window.PIN_REMEASURE();
+    if(window.FOLD_REMEASURE) window.FOLD_REMEASURE();
+    [...bar.querySelectorAll("button")].forEach(b=>b.setAttribute("aria-pressed", String(b.dataset.l===l)));
+  }
+  bar.addEventListener("click",e=>{const b=e.target.closest("button"); if(b) setLang(b.dataset.l);});
+})();
 </script>
 </body>
 </html>
